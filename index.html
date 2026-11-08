@@ -9,8 +9,8 @@
 <meta property="og:description" content="Авторский мерч с граффити, нарисованным от руки маркерами.">
 <meta property="og:image" content="https://changa8.ru/img/og.jpg">
 <meta property="og:url" content="https://changa8.ru/">
-<link rel="canonical" href="https://changa8.ru/">
 <meta property="og:type" content="website">
+<link rel="canonical" href="https://changa8.ru/">
 <link rel="icon" href="img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
@@ -196,6 +196,49 @@ form input:focus,form select:focus,form textarea:focus{outline:3px solid var(--p
 }
 @media (max-width:520px){.steps{grid-template-columns:1fr}.facts{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- анимации ---------- */
+.progress{position:fixed;top:0;left:0;height:4px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--pink),#ffb3d6,var(--pink));z-index:40}
+.hero h1 .w{display:inline-block;opacity:0;transform:translateY(40px) scale(.6);animation:inflate .7s cubic-bezier(.34,1.7,.5,1) forwards;animation-delay:calc(.15s + var(--i)*.09s)}
+@keyframes inflate{60%{opacity:1;transform:translateY(-6px) scale(1.08)}to{opacity:1;transform:none}}
+.hero .tag,.hero p.lead,.hero .btns,.hero .stats{opacity:0;animation:rise .7s ease forwards}
+.hero .tag{animation-delay:.05s}.hero p.lead{animation-delay:.7s}.hero .btns{animation-delay:.85s}.hero .stats{animation-delay:1s}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.hero .tag{animation:rise .6s ease .05s forwards,wiggle 3.5s ease-in-out 1.5s infinite}
+@keyframes wiggle{0%,90%,100%{transform:rotate(-2deg)}93%{transform:rotate(3deg)}96%{transform:rotate(-5deg)}}
+.hero-art{opacity:0;animation:popin .9s cubic-bezier(.34,1.6,.5,1) .3s forwards;cursor:pointer}
+@keyframes popin{from{opacity:0;transform:scale(.4) rotate(-12deg)}to{opacity:1;transform:none}}
+.hero-art.squish .blob,.hero-art.squish img{animation:squish .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes squish{30%{transform:scale(1.15,.85)}60%{transform:scale(.92,1.08)}}
+.hero-art .bub{animation:bob 4s ease-in-out infinite}
+.hero-art .bub:nth-of-type(3){animation-duration:5.5s;animation-delay:-1s}
+.hero-art .bub:nth-of-type(4){animation-duration:3.2s;animation-delay:-2s}
+.confetti i{animation:drift 6s ease-in-out infinite;animation-delay:calc(var(--k)*-0.7s)}
+@keyframes drift{50%{translate:0 -14px;rotate:25deg}}
+.bubbles{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.hero .wrap{position:relative;z-index:1}
+.bubbles span{position:absolute;bottom:-80px;border-radius:50%;border:2.5px solid rgba(27,18,32,.55);background:radial-gradient(circle at 32% 30%,#fff 0 12%,rgba(255,159,203,.55) 13% 60%,rgba(255,95,168,.45) 100%);animation:up linear infinite;pointer-events:auto;cursor:pointer}
+@keyframes up{from{transform:translate(0,0)}25%{transform:translate(14px,-28vh)}50%{transform:translate(-10px,-56vh)}75%{transform:translate(12px,-84vh)}to{transform:translate(0,-112vh)}}
+.pop{position:fixed;pointer-events:none;z-index:95;width:10px;height:10px;border-radius:50%;background:var(--pink);border:2px solid var(--ink);animation:burst .6s ease-out forwards}
+@keyframes burst{to{transform:translate(var(--x),var(--y)) scale(.2);opacity:0}}
+.reveal{opacity:0;transform:translateY(36px) scale(.97);transition:opacity .6s ease,transform .7s cubic-bezier(.3,1.4,.5,1);transition-delay:var(--d,0s)}
+.reveal.in{opacity:1;transform:none}
+.card{transform-style:preserve-3d;will-change:transform}
+.card.in:hover{transform:perspective(800px) translate(-3px,-3px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .08s linear,box-shadow .18s}
+.card .pic svg,.card .pic img{transition:transform .5s cubic-bezier(.3,1.5,.5,1)}
+.card:hover .pic svg,.card:hover .pic img{transform:scale(1.06) rotate(-1.5deg)}
+.add{transition:transform .15s}.add:hover{transform:rotate(90deg) scale(1.08)}.add:active{transform:scale(.85)}
+.cart-btn.bump{animation:bump .5s cubic-bezier(.3,1.8,.5,1)}
+@keyframes bump{30%{transform:scale(1.18) rotate(-4deg)}60%{transform:scale(.95) rotate(2deg)}}
+.flyer{position:fixed;z-index:96;width:70px;height:70px;border-radius:50%;border:3px solid var(--ink);background:#fff center/cover;pointer-events:none;box-shadow:3px 3px 0 var(--ink);transition:transform .75s cubic-bezier(.5,-0.3,.6,1),opacity .75s}
+.confetto{position:fixed;top:-20px;width:10px;height:22px;border:2px solid var(--ink);border-radius:4px;z-index:97;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translate(var(--x),110vh) rotate(var(--r))}}
+.step b{display:inline-block;transition:transform .3s}.step:hover b{transform:rotate(-8deg) scale(1.15)}
+.paper{transition:transform .5s cubic-bezier(.3,1.5,.5,1)}.paper:hover{transform:rotate(0deg) scale(1.03)}
+.btn{position:relative;overflow:hidden}
+.btn::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);transition:left .6s}
+.btn:hover::after{left:130%}
+@media (prefers-reduced-motion:reduce){.reveal,.hero h1 .w,.hero .tag,.hero p.lead,.hero .btns,.hero .stats,.hero-art{opacity:1!important;transform:none!important}.bubbles{display:none}}
 </style>
 </head>
 <body>
@@ -207,11 +250,11 @@ form input:focus,form select:focus,form textarea:focus{outline:3px solid var(--p
 </div></header>
 
 <div class="hero" id="top">
-  <div class="confetti" id="confetti"></div>
+  <div class="progress" id="progress"></div><div class="bubbles" id="bubbles"></div><div class="confetti" id="confetti"></div>
   <div class="wrap grid">
     <div>
       <span class="tag">Drop 01 · лимитированная серия</span>
-      <h1>Мерч <em>CHANGA</em><br>со вкусом жвачки</h1>
+      <h1><span class="w" style="--i:0">Мерч</span> <em class="w" style="--i:1">CHANGA</em><br><span class="w" style="--i:2">со</span> <span class="w" style="--i:3">вкусом</span> <span class="w" style="--i:4">жвачки</span></h1>
       <p class="lead">Граффити нарисовано от руки маркерами на тетрадном листе. Теперь оно на худи, футболках, кепках и стикерах. Каждую вещь печатаем под заказ.</p>
       <div class="btns">
         <a class="btn" href="#shop">Смотреть коллекцию →</a>
@@ -236,7 +279,7 @@ form input:focus,form select:focus,form textarea:focus{outline:3px solid var(--p
 <div class="marquee"><div id="mq"></div></div>
 
 <section id="shop"><div class="wrap">
-  <div class="sec-h">
+  <div class="sec-h reveal">
     <div><span class="tag" style="background:var(--mint)">Каталог</span><h2 style="margin-top:14px">Коллекция<br>Bubble Gum</h2></div>
     <div class="filters" id="filters"></div>
   </div>
@@ -244,7 +287,7 @@ form input:focus,form select:focus,form textarea:focus{outline:3px solid var(--p
 </div></section>
 
 <section class="about" id="about"><div class="wrap grid">
-  <div class="paper"><img src="img/white.webp" alt="Оригинальный рисунок"></div>
+  <div class="paper reveal"><img src="img/white.webp" alt="Оригинальный рисунок"></div>
   <div>
     <h2>Нарисовано<br>в тетради в клетку</h2>
     <p>CHANGA придумала и нарисовала 13-летняя художница: розовые маркеры, чёрная обводка, белые блики. Буквы получились как надутые пузыри жвачки.</p>
@@ -258,25 +301,25 @@ form input:focus,form select:focus,form textarea:focus{outline:3px solid var(--p
 </div></section>
 
 <section id="how"><div class="wrap">
-  <div class="sec-h"><h2>Как это работает</h2><p>Вещи не лежат на складе: печатаем их после заказа, поэтому каждая выходит свежей.</p></div>
+  <div class="sec-h reveal"><h2>Как это работает</h2><p>Вещи не лежат на складе: печатаем их после заказа, поэтому каждая выходит свежей.</p></div>
   <div class="steps">
-    <div class="step"><b>01</b><h3>Выбираете</h3><p>Добавьте вещи в корзину: размер, цвет, количество.</p></div>
-    <div class="step"><b>02</b><h3>Оформляете</h3><p>Оставьте имя и контакт, мы напишем и подтвердим заказ.</p></div>
-    <div class="step"><b>03</b><h3>Печатаем</h3><p>DTF-печать на текстиле, сублимация на кружках, плоттерная резка стикеров.</p></div>
-    <div class="step"><b>04</b><h3>Отправляем</h3><p>СДЭК, Почта России или самовывоз. Трек-номер пришлём в мессенджер.</p></div>
+    <div class="step reveal"><b>01</b><h3>Выбираете</h3><p>Добавьте вещи в корзину: размер, цвет, количество.</p></div>
+    <div class="step reveal"><b>02</b><h3>Оформляете</h3><p>Оставьте имя и контакт, мы напишем и подтвердим заказ.</p></div>
+    <div class="step reveal"><b>03</b><h3>Печатаем</h3><p>DTF-печать на текстиле, сублимация на кружках, плоттерная резка стикеров.</p></div>
+    <div class="step reveal"><b>04</b><h3>Отправляем</h3><p>СДЭК, Почта России или самовывоз. Трек-номер пришлём в мессенджер.</p></div>
   </div>
 </div></section>
 
 <section id="faq" style="padding-top:0"><div class="wrap">
-  <div class="sec-h"><h2>Вопросы</h2></div>
-  <details><summary>Как выбрать размер?</summary>
+  <div class="sec-h reveal"><h2>Вопросы</h2></div>
+  <details class="reveal"><summary>Как выбрать размер?</summary>
     <table class="size-t"><tr><th>Размер</th><th>XS</th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th></tr>
     <tr><td>Ширина груди, см</td><td>46</td><td>49</td><td>52</td><td>55</td><td>58</td><td>61</td></tr>
     <tr><td>Длина, см</td><td>66</td><td>69</td><td>72</td><td>74</td><td>76</td><td>78</td></tr></table>
     <p>Оверсайз-модели сидят свободно. Если любите по фигуре, берите на размер меньше.</p></details>
-  <details><summary>Как оплатить?</summary><p>После оформления мы свяжемся с вами и пришлём ссылку на оплату или реквизиты. Печатать начинаем только после подтверждения.</p></details>
-  <details><summary>Сколько ждать?</summary><p>Изготовление занимает 5–10 рабочих дней, плюс доставка по вашему городу.</p></details>
-  <details><summary>Как ухаживать за вещами с принтом?</summary><p>Стирайте вывернутыми наизнанку при 30°, не гладьте по принту и не сушите в барабане.</p></details>
+  <details class="reveal"><summary>Как оплатить?</summary><p>После оформления мы свяжемся с вами и пришлём ссылку на оплату или реквизиты. Печатать начинаем только после подтверждения.</p></details>
+  <details class="reveal"><summary>Сколько ждать?</summary><p>Изготовление занимает 5–10 рабочих дней, плюс доставка по вашему городу.</p></details>
+  <details class="reveal"><summary>Как ухаживать за вещами с принтом?</summary><p>Стирайте вывернутыми наизнанку при 30°, не гладьте по принту и не сушите в барабане.</p></details>
 </div></section>
 
 <footer><div class="wrap">
@@ -382,14 +425,15 @@ const BGS={tee:"#fff4f9",teeos:"#fff6e6",hoodie:"#ffeef6",sweat:"#effaf5",cap:"#
 let cat="all";
 function renderFilters(){document.getElementById("filters").innerHTML=CATS.map(([k,n])=>`<button class="chip ${k===cat?"on":""}" data-cat="${k}">${n}</button>`).join("")}
 function renderGrid(){
- document.getElementById("grid").innerHTML=P.filter(p=>cat==="all"||p.cat===cat).map(p=>`
-  <article class="card" data-open="${p.id}">
+ document.getElementById("grid").innerHTML=P.filter(p=>cat==="all"||p.cat===cat).map((p,i)=>`
+  <article class="card reveal" style="--d:${(i%4)*0.08}s" data-open="${p.id}">
    <div class="pic">${pic(p,p.colors[0])}${p.badge?`<span class="badge ${p.hot?"hot":""}">${p.badge}</span>`:""}</div>
    <div class="info"><h3>${p.name}</h3><div class="desc">${p.desc}</div>
     <div class="row"><div><div class="price">${fmt(p.price)}${p.old?`<s>${fmt(p.old)}</s>`:""}</div>
      ${p.colors.length>1?`<div class="swatches" style="margin-top:6px">${p.colors.map(c=>`<i style="background:${COLORS[c].f}"></i>`).join("")}</div>`:""}</div>
      <button class="add" data-open="${p.id}" aria-label="Выбрать">+</button></div></div>
   </article>`).join("");
+ window.__reveal&&__reveal();
 }
 document.getElementById("filters").addEventListener("click",e=>{const b=e.target.closest("[data-cat]");if(!b)return;cat=b.dataset.cat;renderFilters();renderGrid()});
 document.getElementById("grid").addEventListener("click",e=>{const b=e.target.closest("[data-open]");if(b)openProduct(b.dataset.open)});
@@ -420,7 +464,7 @@ document.getElementById("modal").addEventListener("click",e=>{
  const c=e.target.closest("[data-color]"),s=e.target.closest("[data-size]");
  if(c){sel.color=c.dataset.color;drawModal()}
  if(s){sel.size=s.dataset.size;drawModal()}
- if(e.target.closest("#addBtn")){addToCart({...sel});hide("modal");toast("Добавлено в корзину 🍬")}
+ if(e.target.closest("#addBtn")){flyToCart(document.querySelector("#mBox .m-pic"));addToCart({...sel});hide("modal");toast("Добавлено в корзину 🍬")}
 });
 
 /* ---------- корзина ---------- */
@@ -489,7 +533,7 @@ function place(){
  const text=`Заказ CHANGA ${num}\n${lines.join("\n")}\nИтого: ${fmt(total())} + доставка\n\nИмя: ${name}\nКонтакт: ${contact}\nГород: ${city}\nДоставка: ${v("dl")}${v("cm")?"\nКомментарий: "+v("cm"):""}`;
  lastOrder={num,name,contact,text};
  try{const all=JSON.parse(localStorage.getItem("changa_orders")||"[]");all.push({num,text,at:new Date().toISOString()});localStorage.setItem("changa_orders",JSON.stringify(all))}catch(e){}
- cart=[];save();updCount();step="done";drawCart();
+ cart=[];save();updCount();step="done";drawCart();confettiRain();
 }
 
 /* ---------- общее ---------- */
@@ -509,7 +553,42 @@ let tt;function toast(m){const t=document.getElementById("toast");t.textContent=
  document.getElementById("mq").innerHTML=w.repeat(8);
  const f=document.getElementById("contactFoot");f.textContent=CONTACT.telegram?"Telegram: "+CONTACT.telegram:CONTACT.phone?CONTACT.phone:"© CHANGA";
 })();
+/* ---------- анимации ---------- */
+const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+(()=>{document.querySelectorAll("#confetti i").forEach((e,k)=>e.style.setProperty("--k",k))})();
+const io=("IntersectionObserver" in window)?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12,rootMargin:"0px 0px -40px 0px"}):null;
+function __reveal(){document.querySelectorAll(".reveal:not(.in)").forEach(el=>io?io.observe(el):el.classList.add("in"))}
+window.__reveal=__reveal;
+// прогресс прокрутки
+const pr=document.getElementById("progress");
+addEventListener("scroll",()=>{const h=document.documentElement;pr.style.transform=`scaleX(${h.scrollTop/(h.scrollHeight-h.clientHeight||1)})`},{passive:true});
+// пузыри в шапке, лопаются по клику
+function popAt(x,y,n=10,col){for(let i=0;i<n;i++){const d=document.createElement("i");d.className="pop";const a=Math.PI*2*i/n,r=40+Math.random()*30;d.style.left=x-5+"px";d.style.top=y-5+"px";d.style.setProperty("--x",Math.cos(a)*r+"px");d.style.setProperty("--y",Math.sin(a)*r+"px");if(col)d.style.background=col;document.body.appendChild(d);setTimeout(()=>d.remove(),650)}}
+if(!RM){const B=document.getElementById("bubbles");
+ function spawn(first){const s=document.createElement("span");const z=18+Math.random()*46;s.style.width=s.style.height=z+"px";s.style.left=Math.random()*100+"%";const dur=9+Math.random()*9;s.style.animationDuration=dur+"s";if(first)s.style.animationDelay=-Math.random()*dur+"s";
+  s.addEventListener("click",e=>{popAt(e.clientX,e.clientY,8);s.remove();spawn()});s.addEventListener("animationiteration",()=>{s.style.left=Math.random()*100+"%"});B.appendChild(s)}
+ for(let i=0;i<14;i++)spawn(true);}
+// логотип: сплющивается и брызгает пузырями
+const ha=document.querySelector(".hero-art");
+ha.addEventListener("click",e=>{ha.classList.remove("squish");void ha.offsetWidth;ha.classList.add("squish");popAt(e.clientX,e.clientY,14)});
+// наклон карточек за курсором
+document.getElementById("grid").addEventListener("mousemove",e=>{const c=e.target.closest(".card");if(!c||RM)return;const r=c.getBoundingClientRect();c.style.setProperty("--ry",((e.clientX-r.left)/r.width-.5)*10+"deg");c.style.setProperty("--rx",(.5-(e.clientY-r.top)/r.height)*10+"deg")});
+document.getElementById("grid").addEventListener("mouseout",e=>{const c=e.target.closest(".card");if(c&&!c.contains(e.relatedTarget)){c.style.setProperty("--rx","0deg");c.style.setProperty("--ry","0deg")}});
+// полёт товара в корзину
+function flyToCart(from){const cb=document.getElementById("openCart");const bump=()=>{cb.classList.remove("bump");void cb.offsetWidth;cb.classList.add("bump")};
+ if(!from||RM){bump();return}const a=from.getBoundingClientRect(),b=cb.getBoundingClientRect();
+ const f=document.createElement("div");f.className="flyer";const svg=from.querySelector("svg");const img=from.querySelector("img");
+ if(img)f.style.backgroundImage=`url("${img.src}")`;else if(svg)f.innerHTML=svg.outerHTML.replace("<svg",'<svg style="width:100%;height:100%;border-radius:50%"');
+ f.style.left=a.left+a.width/2-35+"px";f.style.top=a.top+a.height/2-35+"px";document.body.appendChild(f);
+ requestAnimationFrame(()=>{f.style.transform=`translate(${b.left+b.width/2-(a.left+a.width/2)}px,${b.top+b.height/2-(a.top+a.height/2)}px) scale(.3)`;f.style.opacity=".6"});
+ setTimeout(()=>{f.remove();bump();popAt(b.left+b.width/2,b.top+b.height/2,8)},760)}
+// конфетти после заказа
+function confettiRain(){if(RM)return;const cols=["#ff5fa8","#ffd3e8","#fff1a8","#b9f3dd","#cfe9ff","#fff"];for(let i=0;i<70;i++){const c=document.createElement("i");c.className="confetto";c.style.left=Math.random()*100+"vw";c.style.background=cols[i%cols.length];c.style.setProperty("--x",(Math.random()*200-100)+"px");c.style.setProperty("--r",(Math.random()*720-360)+"deg");c.style.animationDuration=1.8+Math.random()*1.8+"s";c.style.animationDelay=Math.random()*.6+"s";document.body.appendChild(c);setTimeout(()=>c.remove(),4500)}}
+// счётчики в шапке
+document.querySelectorAll(".stats b").forEach(b=>{const m=b.textContent.match(/^(\D*)(\d+)(.*)$/);if(!m||RM)return;const[,pre,num,post]=m,n=+num;let s=null;const go=t=>{s??=t;const k=Math.min(1,(t-s)/1100);b.textContent=pre+Math.round(n*(1-Math.pow(1-k,3)))+post;if(k<1)requestAnimationFrame(go)};setTimeout(()=>requestAnimationFrame(go),1000)});
+__reveal();
 renderFilters();renderGrid();updCount();
+
 </script>
 </body>
 </html>
